@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\Game;
 use App\Repositories\RoundRepository;
+use App\Services\CommentService;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\GameRepository;
 use App\Enums\GameStatus;
@@ -15,10 +16,13 @@ class GameService
     public GameRepository $gameRepository;
     public RoundRepository $roundRepository;
 
-    public function __construct(GameRepository $gameRepository, RoundRepository $roundRepository)
+    public CommentService $commentService;
+
+    public function __construct(GameRepository $gameRepository, RoundRepository $roundRepository, CommentService $commentService)
     {
         $this->gameRepository = $gameRepository;
         $this->roundRepository = $roundRepository;
+        $this->commentService = $commentService;
     }
 
     public function returnAllGames(): Collection
@@ -81,7 +85,7 @@ class GameService
             ];
         };
 
-        //Inicia uma nova rodada
+        //Inicia uma nova rodada e salva um comentário sobre a antiga
         if (isset($data)) {
             $oldRound = $this->roundRepository->updateRound($data, $currentRound);
 
@@ -94,6 +98,8 @@ class GameService
             $this->roundRepository->updateRound($newData, $newRound);
 
             GameWon::dispatch($newRound->round_start, $newRound->team_1_score, $newRound->team_2_score, count($game->rounds()->get()), $game->id);
+
+            $this->commentService->createComment($oldRound);
         };
 
         return $game;
