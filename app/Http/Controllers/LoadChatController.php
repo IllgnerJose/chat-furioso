@@ -32,7 +32,7 @@ class LoadChatController extends Controller
                 "team_1_logo"=>$game->team1->logo_path,
                 "team_2_logo"=>$game->team2->logo_path,
                 "game_status"=>$game->status,
-                "game_start"=>$game->game_start,
+                "round_start"=>$game->rounds()->latest()->first()->round_start,
                 "game_rounds"=>count($game->rounds()->get()),
             ],
         ]);

@@ -15,7 +15,7 @@ const updateMessages = (newMessage) => {
 };
 
 const startGame = (newGameStatus) => {
-    props.game.game_start = newGameStatus.gameStart;
+    props.game.round_start = newGameStatus.roundStart;
     props.game.game_rounds = newGameStatus.gameRounds;
     props.game.status = newGameStatus.gameStatus;
 };
@@ -24,6 +24,7 @@ const winGame = (newGameStatus) => {
     props.game.team_1_score = newGameStatus.team1Score;
     props.game.team_2_score = newGameStatus.team2Score;
     props.game.game_rounds = newGameStatus.gameRounds;
+    props.game.round_start = newGameStatus.roundStart;
 };
 
 Echo.private(`game.win.${props.game.id}`).listen("GameWon", (e) => {
@@ -54,7 +55,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                             <h1 class="text-amber-400 font-bold text-5xl">{{game.team_1_score}}</h1>
                             <div class="flex flex-col items-center justify-center">
                                 <Timer
-                                    :startDate="game.game_start"
+                                    :startDate="game.round_start"
                                     :rounds="game.game_rounds"
                                     :gameId="game.id"
                                     @start:game="startGame"

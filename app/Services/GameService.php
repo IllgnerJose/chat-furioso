@@ -49,7 +49,7 @@ class GameService
         $currentRound = $game->rounds()->latest()->first();
         $this->roundRepository->updateRound($data, $currentRound);
 
-        GameStarted::dispatch($game->game_start, count($game->rounds()->get()), $game->id, $game->status);
+        GameStarted::dispatch($currentRound->round_start, count($game->rounds()->get()), $game->id, $game->status);
         return $game;
     }
 
@@ -93,7 +93,7 @@ class GameService
             ];
             $this->roundRepository->updateRound($newData, $newRound);
 
-            GameWon::dispatch($newRound->team_1_score, $newRound->team_2_score, count($game->rounds()->get()), $game->id);
+            GameWon::dispatch($newRound->round_start, $newRound->team_1_score, $newRound->team_2_score, count($game->rounds()->get()), $game->id);
         };
 
         return $game;

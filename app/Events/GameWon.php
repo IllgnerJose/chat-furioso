@@ -14,6 +14,7 @@ class GameWon implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $roundStart;
     public $team1Score;
     public $team2Score;
     public $gameRounds;
@@ -22,8 +23,9 @@ class GameWon implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct($team1Score, $team2Score, $gameRounds, $gameId)
+    public function __construct($roundStart, $team1Score, $team2Score, $gameRounds, $gameId)
     {
+        $this->roundStart = $roundStart;
         $this->team1Score = $team1Score;
         $this->team2Score = $team2Score;
         $this->gameRounds = $gameRounds;

@@ -24,22 +24,21 @@ let interval;
 
 const startCountdown = () => {
     const start = new Date(props.startDate);
+    const secPerRound = 120;
 
     if (interval) {
         clearInterval(interval);
     }
 
     interval = setInterval(() => {
-        const secondsPerRound = 120 * props.rounds;
         const diff = Date.now() - start.getTime();
-        const sec = Math.floor(diff / 1000) + (secondsPerRound - 120);
-        const secCountdown = (secondsPerRound - sec);
-        const min = Math.floor(secCountdown / 60);
+        const sec = secPerRound - Math.floor(diff / 1000);
+        const min = Math.floor(sec / 60);
 
         if (min < 0) {
             countdown.value = "0:0";
         } else {
-            countdown.value = `${min}:${secCountdown % 60}`;
+            countdown.value = `${min}:${sec % 60}`;
         }
     }, 1000);
 };
