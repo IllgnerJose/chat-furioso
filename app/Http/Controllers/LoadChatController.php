@@ -27,13 +27,13 @@ class LoadChatController extends Controller
                 "id"=>$game->id,
                 "team_1"=>$game->team1->team,
                 "team_2"=>$game->team2->team,
-                "team_1_score"=>$game->team_1_score,
-                "team_2_score"=>$game->team_2_score,
+                "team_1_score"=>$game->rounds()->latest()->first()->team_1_score,
+                "team_2_score"=>$game->rounds()->latest()->first()->team_2_score,
                 "team_1_logo"=>$game->team1->logo_path,
                 "team_2_logo"=>$game->team2->logo_path,
                 "game_status"=>$game->status,
                 "game_start"=>$game->game_start,
-                "game_rounds"=>$game->rounds,
+                "game_rounds"=>count($game->rounds()->get()),
             ],
         ]);
     }

@@ -11,13 +11,10 @@ class Game extends Model
     protected $fillable = [
         'team_1_id',
         'team_2_id',
-        'team_1_score',
-        'team_2_score',
         'game_date',
         'game_start',
         'game_end',
         'status',
-        'rounds'
     ];
 
     protected $casts = [
@@ -37,5 +34,10 @@ class Game extends Model
     public function messages(): HasMany
     {
         return $this->HasMany(Message::class);
+    }
+
+    public function rounds(): HasMany
+    {
+        return $this->HasMany(Round::class);
     }
 }

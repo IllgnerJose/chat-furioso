@@ -16,10 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_1_id')->constrained('teams')->onDelete('cascade');
             $table->foreignId('team_2_id')->constrained('teams')->onDelete('cascade');
-            $table->integer('team_1_score')->default(0);
-            $table->integer("team_2_score")->default(0);
             $table->string("status")->default(GameStatus::Scheduled->value);
-            $table->integer("rounds")->default(0);
             $table->dateTime('game_date');
             $table->dateTime('game_start')->nullable();
             $table->dateTime('game_end')->nullable();
