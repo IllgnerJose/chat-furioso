@@ -15,7 +15,6 @@ Este é um projeto Laravel moderno de acompanhamento para acompanhamento de part
 - [API REST](#api-rest)
 - [Interacao com LLMs utilizando Prism](#llm-com-prism)
 - [Broadcasting](#broadcasting)
-- [Licença](#licença)
 
 ---
 
@@ -251,9 +250,5 @@ Dispara quando uma mensagem é recebida em um jogo. Ele transmite a mensagem e o
 #### **Método**
 - **`broadcastOn()`**: Define o canal privado onde o evento será transmitido.
 ---
-
-## 📝 Licença
-
-Este projeto está sob a licença [MIT](LICENSE).
 
 
