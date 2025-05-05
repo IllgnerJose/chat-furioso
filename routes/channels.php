@@ -11,6 +11,10 @@ Broadcast::channel('messages.game.{id}', function (User $user) {
     return true;
 });
 
+Broadcast::channel('comments.game.{id}', function (User $user) {
+    return true;
+});
+
 Broadcast::channel('game.start.{id}', function (User $user) {
     return true;
 });

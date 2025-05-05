@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Game;
 use App\Repositories\RoundRepository;
 use App\Services\CommentService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\GameRepository;
 use App\Enums\GameStatus;
@@ -103,5 +104,34 @@ class GameService
         };
 
         return $game;
+    }
+
+    public function formatGame(Game $game): array
+    {
+        $lastRound = $game->rounds->last();
+
+        return [
+            "id" => $game->id,
+            "team_1" => $game->team1->team,
+            "team_2" => $game->team2->team,
+            "team_1_score" => $lastRound?->team_1_score,
+            "team_2_score" => $lastRound?->team_2_score,
+            "team_1_logo" => $game->team1->logo_path,
+            "team_2_logo" => $game->team2->logo_path,
+            "game_status" => $game->status,
+            "game_start" => $game->game_start,
+            "game_date" => Carbon::parse($game->game_date)->format('d.m.Y H:i:s'),
+            "round_start"=>$lastRound->round_start,
+            "game_rounds"=>count($game->rounds()->get()),
+        ];
+    }
+
+    public function getGamesPerStatus(): array
+    {
+        return [
+            'nextGames' => ($this->gameRepository->getGamesByStatus(GameStatus::Scheduled)?->map(fn($game) => $this->formatGame($game))) ?? [],
+            'inProgressGames' => ($this->gameRepository->getGamesByStatus(GameStatus::InProgress)?->map(fn($game) => $this->formatGame($game))) ?? [],
+            'finishedGames' => ($this->gameRepository->getGamesByStatus(GameStatus::Finished)?->map(fn($game) => $this->formatGame($game))) ?? [],
+        ];
     }
 }

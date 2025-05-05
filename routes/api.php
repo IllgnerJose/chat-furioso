@@ -3,8 +3,9 @@
 use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
-Route::apiResources([
-   "games" => GameController::class,
+
+Route::resource('games', GameController::class)->only([
+    'index', 'store'
 ]);
 
 Route::get('games/start/{game}', [GameController::class ,"start"])

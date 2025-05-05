@@ -18,4 +18,12 @@ class CommentRepository
     {
         return $this->commentModel->create($validatedData);
     }
+
+    public function getCommentsPerRound(Round $round): Collection
+    {
+        return $round
+            ->comments()
+            ->with(['round'])
+            ->get();
+    }
 }

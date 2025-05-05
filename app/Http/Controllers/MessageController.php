@@ -2,29 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use App\Models\Message;
 use App\Events\MessageReceived;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Services\MessageService;
+use App\Http\Requests\StoreMessageRequest;
 
 class MessageController extends Controller
 {
-    public function store(Request $request): JsonResponse
+    public MessageService $messageService;
+
+    public function __construct(MessageService $messageService)
     {
-        $data = $request->validate([
-            "message" => "string|required",
-            "id" => "required",
-            "game_id" => "required"
-        ]);
+        $this->messageService = $messageService;
+    }
 
-        $message = auth()->user()->message()->create([
-            "message" => $data["message"],
-            "game_id" => $data["game_id"]
-        ]);
+    public function store(StoreMessageRequest $request): JsonResponse
+    {
+        $data = $request->validated();
 
-        broadcast(new MessageReceived($data["id"], $message->message, $data["game_id"]))->toOthers();
+        $this->messageService->storeMessage($data);
+
         return response()->json([
             "status" => "success",
             "message" => "Message received!",

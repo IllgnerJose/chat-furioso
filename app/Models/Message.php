@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Message extends Model
 {
@@ -19,8 +18,8 @@ class Message extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function game(): HasOne
+    public function game(): belongsTo
     {
-        return $this->hasOne(Game::class);
+        return $this->belongsTo(Game::class);
     }
 }
