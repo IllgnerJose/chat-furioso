@@ -56,7 +56,7 @@ import { Head, Link } from '@inertiajs/vue3';
                             <span>
                                 Acesse o
                                 <a
-                                    href="https://laravel.com/docs"
+                                    href="https://github.com/IllgnerJose/chat-furioso.git"
                                     target="_blank"
                                     class="ml-1 inline-flex items-center space-x-1 font-medium text-[#f53003] underline underline-offset-4 dark:text-[#FF4433]"
                                 >
