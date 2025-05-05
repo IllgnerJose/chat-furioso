@@ -15,7 +15,7 @@ Este é um projeto Laravel moderno de acompanhamento para acompanhamento de part
 - [API REST](#api-rest)
 - [Interacao com LLMs utilizando Prism](#llm-com-prism)
 - [Broadcasting](#broadcasting)
-
+- [Padrão de Código em Inglês](#padrao-de-codigo)
 ---
 
 ## 🧰 Tecnologias Utilizadas
@@ -252,3 +252,12 @@ Dispara quando uma mensagem é recebida em um jogo. Ele transmite a mensagem e o
 ---
 
 
+## 🌐 Padrão de Código em Inglês
+
+Para manter a consistência e seguir as boas práticas recomendadas pelo Laravel Starter Kit, todos os nomes de variáveis, métodos, classes e outros elementos de código foram escritos em inglês. Isso se alinha ao padrão de desenvolvimento utilizado pelo Laravel e garante melhor legibilidade e manutenção, especialmente quando se trabalha com equipes internacionais ou contribuições externas.
+
+### **Por que em Inglês?**
+
+- **Consistência**: O Laravel Starter Kit e outras ferramentas populares da comunidade Laravel geralmente seguem o padrão de utilizar inglês em todas as partes do código. Manter essa abordagem ajuda a manter o código consistente com o ecossistema Laravel.
+- **Manutenção e Colaboração**: Usar inglês facilita a colaboração com outros desenvolvedores que possam precisar interagir com o código no futuro. O inglês é amplamente aceito como a língua padrão no desenvolvimento de software.
+- **Boa Prática**: Manter a padronização do código em inglês, como recomendado pelo Laravel e outras bibliotecas populares, ajuda a seguir uma convenção que é amplamente adotada na comunidade de desenvolvimento PHP.
